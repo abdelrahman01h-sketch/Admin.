@@ -3,849 +3,524 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>EN — Social Network</title>
+<title>EN — Reels</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap');
-
 *{
+    box-sizing:border-box;
     margin:0;
     padding:0;
-    box-sizing:border-box;
 }
 
 :root{
-    --primary:#4f46e5;
-    --secondary:#06b6d4;
-    --bg:#f4f6f9;
-    --card:#fff;
-    --text:#17202a;
-    --muted:#7b8794;
-    --border:#e5e9ef;
-    --soft:#f0f2f5;
-    --danger:#ef4444;
-    --success:#22c55e;
-}
-
-body.dark{
-    --bg:#0b1017;
-    --card:#121923;
-    --text:#f5f7fa;
-    --muted:#96a3b1;
-    --border:#26313d;
-    --soft:#1a232e;
-}
-
-*{
-    scrollbar-width:thin;
+    --bg:#f0f2f5;
+    --white:#fff;
+    --text:#1c1e21;
+    --muted:#65676b;
+    --border:#dddfe2;
+    --blue:#1877f2;
+    --dark:#18191a;
 }
 
 body{
     font-family:"Cairo",sans-serif;
     background:var(--bg);
     color:var(--text);
-    transition:.25s;
-}
-
-button,
-input,
-textarea{
-    font-family:inherit;
-}
-
-button{
-    cursor:pointer;
+    overflow:hidden;
 }
 
 /* ================= HEADER ================= */
 
 .header{
-    height:70px;
-    background:var(--card);
+    height:64px;
+    background:#fff;
     border-bottom:1px solid var(--border);
     display:flex;
     align-items:center;
-    gap:20px;
-    padding:0 28px;
-    position:sticky;
+    justify-content:space-between;
+    padding:0 18px;
+    position:fixed;
     top:0;
-    z-index:1000;
+    left:0;
+    right:0;
+    z-index:100;
 }
 
 .logo{
-    font-size:34px;
-    font-weight:900;
-    letter-spacing:-4px;
-    color:var(--primary);
-    width:100px;
+    font-size:30px;
+    font-weight:800;
+    color:#1877f2;
+    letter-spacing:-2px;
 }
 
-.search{
-    width:360px;
-    height:42px;
-    border-radius:13px;
-    background:var(--soft);
+.header-center{
     display:flex;
-    align-items:center;
-    gap:8px;
-    padding:0 14px;
-    border:1px solid var(--border);
-}
-
-.search input{
-    width:100%;
-    border:0;
-    outline:0;
-    background:transparent;
-    color:var(--text);
-}
-
-.header-actions{
-    margin-right:auto;
-    display:flex;
-    align-items:center;
     gap:8px;
 }
 
-.icon-btn{
-    width:42px;
-    height:42px;
+.header-btn{
+    width:44px;
+    height:44px;
     border:0;
-    background:var(--soft);
-    color:var(--text);
-    border-radius:12px;
-    position:relative;
-    font-size:18px;
+    background:#f0f2f5;
+    border-radius:50%;
+    font-size:20px;
+    cursor:pointer;
 }
 
-.icon-btn:hover{
-    background:var(--border);
-}
-
-.notification-badge{
-    position:absolute;
-    top:-4px;
-    left:-4px;
-    background:var(--danger);
-    color:white;
-    font-size:10px;
-    min-width:18px;
-    height:18px;
-    border-radius:20px;
-    display:grid;
-    place-items:center;
-}
-
-.header-user{
+.header-left{
     display:flex;
     align-items:center;
-    gap:9px;
-    margin-right:5px;
+    gap:10px;
 }
 
-.avatar{
-    width:42px;
-    height:42px;
+.avatar-small{
+    width:40px;
+    height:40px;
     border-radius:50%;
     object-fit:cover;
 }
 
-/* ================= LAYOUT ================= */
-
-.layout{
-    width:min(1400px,100%);
-    margin:auto;
-    padding:24px;
-    display:grid;
-    grid-template-columns:230px minmax(400px,680px) 280px;
-    gap:22px;
-}
-
-.sidebar{
-    position:sticky;
-    top:94px;
-    height:max-content;
-}
-
-.card{
-    background:var(--card);
-    border:1px solid var(--border);
-    border-radius:17px;
-    box-shadow:0 7px 25px rgba(20,30,50,.05);
-}
-
-/* ================= PROFILE MINI ================= */
-
-.mini-profile{
-    text-align:center;
-    padding:20px;
-    margin-bottom:14px;
-}
-
-.mini-profile .avatar{
-    width:75px;
-    height:75px;
-    border:3px solid var(--primary);
-}
-
-.mini-profile h3{
-    font-size:16px;
-    margin-top:8px;
-}
-
-.mini-profile span{
-    color:var(--muted);
-    font-size:12px;
-}
-
-/* ================= NAV ================= */
-
-.navigation{
-    padding:9px;
-}
-
-.nav-item{
-    width:100%;
-    border:0;
-    background:transparent;
-    color:var(--text);
-    text-align:right;
-    padding:12px 13px;
-    border-radius:11px;
-    margin-bottom:3px;
+.profile-name{
     font-size:14px;
+    font-weight:700;
+}
+
+/* ================= REELS ================= */
+
+.reels-page{
+    position:fixed;
+    top:64px;
+    bottom:0;
+    left:0;
+    right:0;
     display:flex;
-    align-items:center;
-    gap:12px;
+    justify-content:center;
+    background:#18191a;
 }
 
-.nav-item:hover,
-.nav-item.active{
-    color:var(--primary);
-    background:rgba(79,70,229,.1);
+.reels-container{
+    height:100%;
+    width:100%;
+    max-width:600px;
+    overflow-y:auto;
+    scroll-snap-type:y mandatory;
+    scrollbar-width:none;
 }
 
-.nav-icon{
-    width:25px;
-    text-align:center;
-    font-size:18px;
-}
-
-/* ================= SECTIONS ================= */
-
-.page{
+.reels-container::-webkit-scrollbar{
     display:none;
 }
 
-.page.active{
-    display:block;
-}
-
-/* ================= STORIES ================= */
-
-.stories{
-    display:flex;
-    gap:11px;
-    overflow-x:auto;
-    margin-bottom:16px;
-}
-
-.story{
-    min-width:104px;
-    height:145px;
-    border-radius:16px;
-    overflow:hidden;
+.reel{
+    height:100%;
+    min-height:100%;
     position:relative;
-    cursor:pointer;
-    flex-shrink:0;
-    background:#ddd;
+    scroll-snap-align:start;
+    background:#000;
+    overflow:hidden;
 }
 
-.story img.cover{
+.reel video{
     width:100%;
     height:100%;
     object-fit:cover;
+    display:block;
 }
 
-.story::after{
+/* gradient */
+.reel::after{
     content:"";
     position:absolute;
     inset:0;
-    background:linear-gradient(
-        transparent 40%,
-        rgba(0,0,0,.75)
-    );
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(0,0,0,.35),
+            transparent 20%,
+            transparent 55%,
+            rgba(0,0,0,.8)
+        );
+    pointer-events:none;
 }
 
-.story .story-avatar{
+/* ================= TOP ================= */
+
+.reel-top{
     position:absolute;
-    top:8px;
-    right:8px;
-    width:37px;
-    height:37px;
-    border-radius:50%;
-    border:3px solid white;
-    object-fit:cover;
-    z-index:2;
-}
-
-.story-name{
-    position:absolute;
-    bottom:8px;
-    right:9px;
-    color:#fff;
-    font-size:12px;
-    font-weight:700;
-    z-index:2;
-}
-
-/* ================= COMPOSER ================= */
-
-.composer{
-    padding:16px;
-    margin-bottom:16px;
-}
-
-.composer-top{
-    display:flex;
-    align-items:center;
-    gap:10px;
-}
-
-.composer-input{
-    flex:1;
-    background:var(--soft);
-    color:var(--muted);
-    padding:11px 16px;
-    border-radius:25px;
-    cursor:pointer;
-    border:1px solid var(--border);
-}
-
-.composer-actions{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    border-top:1px solid var(--border);
-    margin-top:14px;
-    padding-top:10px;
-    gap:5px;
-}
-
-.composer-actions button{
-    border:0;
-    background:transparent;
-    color:var(--muted);
-    padding:9px;
-    border-radius:10px;
-}
-
-.composer-actions button:hover{
-    background:var(--soft);
-}
-
-/* ================= POST ================= */
-
-.post{
-    margin-bottom:16px;
-    overflow:hidden;
-}
-
-.post-header{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    padding:16px;
-}
-
-.post-header .info{
-    flex:1;
-}
-
-.post-header b{
-    font-size:14px;
-}
-
-.post-header small{
-    display:block;
-    color:var(--muted);
-    font-size:11px;
-}
-
-.more{
-    border:0;
-    background:var(--soft);
-    color:var(--text);
-    width:35px;
-    height:35px;
-    border-radius:10px;
-}
-
-.post-text{
-    padding:0 16px 15px;
-    line-height:1.9;
-    font-size:14px;
-}
-
-.post-image{
-    width:100%;
-    max-height:500px;
-    object-fit:cover;
-    display:block;
-}
-
-.post-stats{
+    top:18px;
+    right:18px;
+    left:18px;
+    z-index:5;
     display:flex;
     justify-content:space-between;
-    padding:11px 16px;
-    color:var(--muted);
-    font-size:12px;
+    align-items:center;
+    color:white;
 }
 
-.post-actions{
-    border-top:1px solid var(--border);
-    margin:0 10px;
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:3px;
+.reels-title{
+    font-size:18px;
+    font-weight:800;
 }
 
-.post-actions button{
+.sound-btn{
+    width:42px;
+    height:42px;
+    border-radius:50%;
     border:0;
-    background:transparent;
-    color:var(--muted);
-    padding:11px 3px;
-    border-radius:10px;
-    font-size:12px;
+    background:rgba(0,0,0,.45);
+    color:white;
+    font-size:18px;
+    cursor:pointer;
+    backdrop-filter:blur(10px);
 }
 
-.post-actions button:hover{
-    background:var(--soft);
+/* ================= INFO ================= */
+
+.reel-info{
+    position:absolute;
+    bottom:28px;
+    right:18px;
+    left:90px;
+    z-index:5;
+    color:white;
 }
 
-.post-actions .liked{
-    color:var(--danger);
-}
-
-/* ================= COMMENTS ================= */
-
-.comments{
-    display:none;
-    border-top:1px solid var(--border);
-    padding:12px 16px;
-}
-
-.comments.open{
-    display:block;
-}
-
-.comment{
+.user{
     display:flex;
-    gap:8px;
+    align-items:center;
+    gap:10px;
     margin-bottom:10px;
 }
 
-.comment img{
-    width:34px;
-    height:34px;
+.user img{
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    border:2px solid white;
+    object-fit:cover;
 }
 
-.comment-content{
-    background:var(--soft);
-    border-radius:12px;
-    padding:7px 10px;
-    font-size:12px;
-}
-
-.comment-box{
-    display:flex;
-    gap:7px;
-}
-
-.comment-box input{
-    flex:1;
-    border:1px solid var(--border);
-    background:var(--soft);
-    color:var(--text);
-    outline:0;
-    border-radius:22px;
-    padding:9px 13px;
-}
-
-.comment-box button{
-    border:0;
-    background:var(--primary);
-    color:white;
-    border-radius:20px;
-    padding:7px 15px;
-}
-
-/* ================= RIGHT SIDEBAR ================= */
-
-.right-card{
-    padding:17px;
-    margin-bottom:15px;
-}
-
-.right-title{
-    font-size:14px;
-    margin-bottom:12px;
-}
-
-.person{
-    display:flex;
-    align-items:center;
-    gap:9px;
-    margin:13px 0;
-}
-
-.person .avatar{
-    width:40px;
-    height:40px;
-}
-
-.person-info{
-    flex:1;
-}
-
-.person-info b{
-    display:block;
-    font-size:12px;
-}
-
-.person-info span{
-    color:var(--muted);
-    font-size:10px;
+.username{
+    font-weight:800;
+    font-size:15px;
 }
 
 .follow{
-    border:0;
-    background:var(--primary);
+    background:transparent;
+    border:1px solid rgba(255,255,255,.8);
     color:white;
-    border-radius:8px;
-    padding:6px 9px;
-    font-size:10px;
+    padding:4px 10px;
+    border-radius:7px;
+    margin-right:5px;
+    cursor:pointer;
+    font-family:inherit;
 }
 
-.trend{
-    border-bottom:1px solid var(--border);
-    padding:10px 0;
+.caption{
+    font-size:14px;
+    line-height:1.7;
+    margin-bottom:8px;
 }
 
-.trend:last-child{
-    border:0;
-}
-
-.trend b{
+.music{
     font-size:13px;
+    display:flex;
+    align-items:center;
+    gap:6px;
 }
 
-.trend span{
-    display:block;
-    color:var(--muted);
-    font-size:10px;
+/* ================= ACTIONS ================= */
+
+.actions{
+    position:absolute;
+    left:14px;
+    bottom:25px;
+    z-index:10;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:17px;
 }
 
-/* ================= MODAL ================= */
+.action{
+    color:white;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    cursor:pointer;
+    user-select:none;
+}
+
+.action-icon{
+    width:48px;
+    height:48px;
+    border-radius:50%;
+    background:rgba(0,0,0,.4);
+    backdrop-filter:blur(8px);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:21px;
+    transition:.2s;
+}
+
+.action:hover .action-icon{
+    background:rgba(255,255,255,.2);
+    transform:scale(1.08);
+}
+
+.action-count{
+    font-size:11px;
+    margin-top:3px;
+    font-weight:700;
+}
+
+.liked .action-icon{
+    color:#1877f2;
+}
+
+/* ================= PROGRESS ================= */
+
+.progress{
+    position:absolute;
+    bottom:0;
+    right:0;
+    left:0;
+    height:3px;
+    background:rgba(255,255,255,.25);
+    z-index:20;
+}
+
+.progress-bar{
+    height:100%;
+    width:0;
+    background:#fff;
+}
+
+/* ================= NAVIGATION ================= */
+
+.reel-nav{
+    position:absolute;
+    left:calc(50% + 320px);
+    top:50%;
+    transform:translateY(-50%);
+    z-index:30;
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+}
+
+.nav-arrow{
+    width:48px;
+    height:48px;
+    border:0;
+    border-radius:50%;
+    background:#fff;
+    box-shadow:0 4px 15px rgba(0,0,0,.3);
+    cursor:pointer;
+    font-size:20px;
+}
+
+/* ================= COMMENTS ================= */
 
 .modal{
     position:fixed;
     inset:0;
     background:rgba(0,0,0,.65);
+    z-index:300;
     display:none;
     align-items:center;
     justify-content:center;
-    padding:15px;
-    z-index:5000;
-}
-
-.modal.show{
-    display:flex;
-}
-
-.modal-box{
-    width:min(550px,100%);
-    background:var(--card);
-    border-radius:18px;
-    border:1px solid var(--border);
     padding:20px;
 }
 
-.modal-header{
+.modal.active{
     display:flex;
-    justify-content:space-between;
+}
+
+.comments-box{
+    width:420px;
+    max-width:100%;
+    height:620px;
+    background:#fff;
+    border-radius:14px;
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+}
+
+.comments-header{
+    height:60px;
+    border-bottom:1px solid var(--border);
+    display:flex;
     align-items:center;
-    margin-bottom:15px;
+    justify-content:space-between;
+    padding:0 18px;
+    font-weight:800;
 }
 
 .close{
+    border:0;
+    background:#f0f2f5;
     width:35px;
     height:35px;
-    border:0;
     border-radius:50%;
-    background:var(--soft);
-    color:var(--text);
+    cursor:pointer;
 }
 
-textarea{
-    width:100%;
-    height:160px;
-    resize:none;
-    border:1px solid var(--border);
-    border-radius:13px;
-    background:var(--soft);
-    color:var(--text);
-    padding:13px;
-    outline:0;
+.comments-list{
+    flex:1;
+    overflow:auto;
+    padding:15px;
 }
 
-.primary-btn{
-    width:100%;
-    border:0;
-    background:linear-gradient(135deg,var(--primary),var(--secondary));
-    color:white;
-    padding:12px;
-    border-radius:11px;
-    margin-top:10px;
-    font-weight:700;
-}
-
-/* ================= PROFILE PAGE ================= */
-
-.cover{
-    height:190px;
-    background:
-        linear-gradient(120deg,#312e81,#06b6d4);
-}
-
-.profile-content{
-    padding:0 20px 20px;
-}
-
-.profile-large{
-    width:105px;
-    height:105px;
-    border-radius:50%;
-    object-fit:cover;
-    border:5px solid var(--card);
-    margin-top:-52px;
-}
-
-.profile-content h1{
-    font-size:22px;
-    margin-top:5px;
-}
-
-.profile-content p{
-    color:var(--muted);
-    font-size:12px;
-    margin-top:4px;
-}
-
-.profile-tabs{
+.comment{
     display:flex;
-    gap:8px;
-    margin-top:17px;
-    border-top:1px solid var(--border);
-    padding-top:10px;
+    gap:10px;
+    margin-bottom:18px;
 }
 
-.profile-tabs button{
-    border:0;
-    background:transparent;
-    color:var(--muted);
-    padding:7px 14px;
-}
-
-.profile-tabs button.active{
-    color:var(--primary);
-    font-weight:700;
-}
-
-/* ================= NOTIFICATIONS ================= */
-
-.notification{
-    display:flex;
-    align-items:center;
-    gap:12px;
-    padding:14px;
-    border-bottom:1px solid var(--border);
-}
-
-.notification:last-child{
-    border-bottom:0;
-}
-
-.notification-icon{
-    width:40px;
-    height:40px;
+.comment img{
+    width:38px;
+    height:38px;
     border-radius:50%;
-    display:grid;
-    place-items:center;
-    background:var(--soft);
 }
 
-/* ================= SETTINGS ================= */
-
-.setting{
-    padding:16px 0;
-    border-bottom:1px solid var(--border);
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
+.comment-body{
+    background:#f0f2f5;
+    border-radius:15px;
+    padding:8px 12px;
 }
 
-.setting:last-child{
-    border:0;
-}
-
-.setting small{
-    display:block;
-    color:var(--muted);
-    margin-top:3px;
-}
-
-.switch{
-    width:48px;
-    height:26px;
-    border:0;
-    background:#94a3b8;
-    border-radius:20px;
-    padding:3px;
-}
-
-.switch span{
-    display:block;
-    width:20px;
-    height:20px;
-    background:white;
-    border-radius:50%;
-    transition:.2s;
-}
-
-.switch.on{
-    background:var(--primary);
-}
-
-.switch.on span{
-    transform:translateX(-22px);
-}
-
-/* ================= MOBILE NAV ================= */
-
-.mobile-nav{
-    display:none;
-}
-
-/* ================= TOAST ================= */
-
-.toast{
-    position:fixed;
-    bottom:25px;
-    right:25px;
-    background:#111827;
-    color:#fff;
-    padding:11px 17px;
-    border-radius:10px;
-    opacity:0;
-    transform:translateY(30px);
-    transition:.25s;
-    z-index:7000;
+.comment-name{
+    font-weight:800;
     font-size:13px;
 }
 
-.toast.show{
-    opacity:1;
-    transform:translateY(0);
+.comment-text{
+    font-size:13px;
 }
 
-/* ================= RESPONSIVE ================= */
-
-@media(max-width:1100px){
-
-    .layout{
-        grid-template-columns:75px minmax(400px,680px);
-    }
-
-    .right-sidebar{
-        display:none;
-    }
-
-    .mini-profile h3,
-    .mini-profile span,
-    .nav-item span{
-        display:none;
-    }
-
-    .nav-item{
-        justify-content:center;
-    }
+.comment-form{
+    border-top:1px solid var(--border);
+    padding:12px;
+    display:flex;
+    gap:8px;
 }
+
+.comment-form input{
+    flex:1;
+    border:0;
+    background:#f0f2f5;
+    border-radius:20px;
+    padding:11px 15px;
+    outline:none;
+    font-family:inherit;
+}
+
+.comment-form button{
+    border:0;
+    background:#1877f2;
+    color:white;
+    padding:0 15px;
+    border-radius:20px;
+    cursor:pointer;
+}
+
+/* ================= SHARE ================= */
+
+.share-box{
+    background:#fff;
+    width:360px;
+    border-radius:14px;
+    padding:20px;
+}
+
+.share-box h3{
+    margin-bottom:15px;
+}
+
+.share-option{
+    width:100%;
+    border:0;
+    background:#f0f2f5;
+    padding:13px;
+    border-radius:9px;
+    margin-bottom:8px;
+    text-align:right;
+    cursor:pointer;
+    font-family:inherit;
+}
+
+/* ================= MOBILE ================= */
 
 @media(max-width:700px){
 
+    body{
+        background:#000;
+    }
+
     .header{
-        height:60px;
-        padding:0 12px;
+        height:56px;
+        background:rgba(0,0,0,.7);
+        border:0;
+        color:white;
     }
 
     .logo{
-        width:auto;
+        color:white;
+        font-size:25px;
     }
 
-    .search{
+    .profile-name{
         display:none;
     }
 
-    .header-user span{
-        display:none;
+    .header-btn{
+        background:rgba(255,255,255,.15);
+        color:white;
     }
 
-    .layout{
-        display:block;
-        padding:12px;
-        padding-bottom:75px;
-    }
-
-    .left-sidebar{
-        display:none;
-    }
-
-    .right-sidebar{
-        display:none;
-    }
-
-    .mobile-nav{
-        position:fixed;
-        display:flex;
+    .reels-page{
+        top:56px;
         bottom:0;
-        left:0;
-        right:0;
-        height:64px;
-        background:var(--card);
-        border-top:1px solid var(--border);
-        z-index:1000;
-        justify-content:space-around;
-        align-items:center;
     }
 
-    .mobile-nav button{
-        border:0;
-        background:transparent;
-        color:var(--muted);
-        font-size:20px;
+    .reels-container{
+        max-width:none;
     }
 
-    .mobile-nav button.active{
-        color:var(--primary);
+    .reel{
+        height:100dvh;
     }
 
-    .story{
-        min-width:90px;
-        height:130px;
+    .reel-nav{
+        display:none;
     }
 
-    .post-actions button{
-        font-size:10px;
+    .reel-info{
+        bottom:25px;
+        right:15px;
+        left:78px;
+    }
+
+    .actions{
+        left:10px;
+        bottom:25px;
+    }
+
+    .action-icon{
+        width:43px;
+        height:43px;
+    }
+
+    .caption{
+        font-size:13px;
     }
 }
 </style>
@@ -853,1810 +528,557 @@ textarea{
 
 <body>
 
+<!-- HEADER -->
 <header class="header">
 
-    <div class="logo">EN</div>
-
-    <div class="search">
-        🔎
-        <input
-            id="searchInput"
-            placeholder="ابحث في EN..."
-            oninput="searchUsers(this.value)">
+    <div class="header-left">
+        <div class="logo">EN</div>
     </div>
 
-    <div class="header-actions">
+    <div class="header-center">
+        <button class="header-btn" title="الرئيسية">⌂</button>
+        <button class="header-btn" title="البحث">⌕</button>
+        <button class="header-btn" title="الإشعارات">♢</button>
+    </div>
 
-        <button
-            class="icon-btn"
-            onclick="showPage('notifications')">
-
-            🔔
-
-            <span
-                class="notification-badge"
-                id="notificationBadge">
-
-                3
-
-            </span>
-
-        </button>
-
-        <button
-            class="icon-btn"
-            onclick="showPage('messages')">
-
-            💬
-
-        </button>
-
-        <button
-            class="icon-btn"
-            onclick="toggleDark()">
-
-            🌙
-
-        </button>
-
-        <div class="header-user">
-
-            <img
-                class="avatar"
-                src="https://i.pravatar.cc/100?img=12">
-
-            <span>عبدالرحمن</span>
-
-        </div>
-
+    <div class="header-left">
+        <img
+            class="avatar-small"
+            src="https://i.pravatar.cc/100?img=12"
+            alt="profile"
+        >
+        <span class="profile-name">عبدالرحمن</span>
     </div>
 
 </header>
 
 
-<div class="layout">
-
-<!-- ================= LEFT ================= -->
-
-<aside class="sidebar left-sidebar">
-
-    <div class="card mini-profile">
-
-        <img
-            class="avatar"
-            src="https://i.pravatar.cc/150?img=12">
-
-        <h3>عبدالرحمن</h3>
-
-        <span>@abdelrahman</span>
-
-    </div>
-
-
-    <div class="card navigation">
-
-        <button
-            class="nav-item active"
-            data-page="home"
-            onclick="showPage('home')">
-
-            <span class="nav-icon">🏠</span>
-            <span>الرئيسية</span>
-
-        </button>
-
-        <button
-            class="nav-item"
-            data-page="profile"
-            onclick="showPage('profile')">
-
-            <span class="nav-icon">👤</span>
-            <span>ملفي الشخصي</span>
-
-        </button>
-
-        <button
-            class="nav-item"
-            data-page="notifications"
-            onclick="showPage('notifications')">
-
-            <span class="nav-icon">🔔</span>
-            <span>الإشعارات</span>
-
-        </button>
-
-        <button
-            class="nav-item"
-            data-page="messages"
-            onclick="showPage('messages')">
-
-            <span class="nav-icon">💬</span>
-            <span>الرسائل</span>
-
-        </button>
-
-        <button
-            class="nav-item"
-            data-page="friends"
-            onclick="showPage('friends')">
-
-            <span class="nav-icon">👥</span>
-            <span>الأصدقاء</span>
-
-        </button>
-
-        <button
-            class="nav-item"
-            data-page="saved"
-            onclick="showPage('saved')">
-
-            <span class="nav-icon">🔖</span>
-            <span>المحفوظات</span>
-
-        </button>
-
-        <button
-            class="nav-item"
-            data-page="settings"
-            onclick="showPage('settings')">
-
-            <span class="nav-icon">⚙️</span>
-            <span>الإعدادات</span>
-
-        </button>
-
-    </div>
-
-</aside>
-
-
-<!-- ================= MAIN ================= -->
-
-<main>
-
-<!-- HOME -->
-
-<section
-    id="home"
-    class="page active">
-
-    <!-- STORIES -->
-
-    <div class="stories">
-
-        <div
-            class="story"
-            onclick="openStory('قصتك')">
-
-            <img
-                class="cover"
-                src="https://images.unsplash.com/photo-1497366754035-f200968a6e72">
-
-            <img
-                class="story-avatar"
-                src="https://i.pravatar.cc/70?img=12">
-
-            <div class="story-name">
-                قصتك
-            </div>
-
-        </div>
-
-
-        <div
-            class="story"
-            onclick="openStory('سارة')">
-
-            <img
-                class="cover"
-                src="https://images.unsplash.com/photo-1494790108377-be9c29b29330">
-
-            <img
-                class="story-avatar"
-                src="https://i.pravatar.cc/70?img=47">
-
-            <div class="story-name">
-                سارة
-            </div>
-
-        </div>
-
-
-        <div
-            class="story"
-            onclick="openStory('أحمد')">
-
-            <img
-                class="cover"
-                src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e">
-
-            <img
-                class="story-avatar"
-                src="https://i.pravatar.cc/70?img=11">
-
-            <div class="story-name">
-                أحمد
-            </div>
-
-        </div>
-
-
-        <div
-            class="story"
-            onclick="openStory('نور')">
-
-            <img
-                class="cover"
-                src="https://images.unsplash.com/photo-1534528741775-53994a69daeb">
-
-            <img
-                class="story-avatar"
-                src="https://i.pravatar.cc/70?img=32">
-
-            <div class="story-name">
-                نور
-            </div>
-
-        </div>
-
-
-        <div
-            class="story"
-            onclick="openStory('محمد')">
-
-            <img
-                class="cover"
-                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d">
-
-            <img
-                class="story-avatar"
-                src="https://i.pravatar.cc/70?img=13">
-
-            <div class="story-name">
-                محمد
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <!-- COMPOSER -->
-
-    <div class="card composer">
-
-        <div class="composer-top">
-
-            <img
-                class="avatar"
-                src="https://i.pravatar.cc/100?img=12">
-
-            <div
-                class="composer-input"
-                onclick="openComposer()">
-
-                ماذا تريد أن تشارك اليوم؟
-
-            </div>
-
-        </div>
-
-
-        <div class="composer-actions">
-
-            <button onclick="openComposer()">
-                📹 فيديو مباشر
-            </button>
-
-            <button onclick="openComposer()">
-                🖼️ صورة / فيديو
-            </button>
-
-            <button onclick="openComposer()">
-                😊 شعور
-            </button>
-
-        </div>
-
-    </div>
-
-
-    <div id="feed"></div>
-
-</section>
-
-
-<!-- PROFILE -->
-
-<section
-    id="profile"
-    class="page">
-
-    <div class="card">
-
-        <div class="cover"></div>
-
-        <div class="profile-content">
-
-            <img
-                class="profile-large"
-                src="https://i.pravatar.cc/180?img=12">
-
-            <h1>عبدالرحمن</h1>
-
-            <p>
-                @abdelrahman · عضو في EN منذ 2026
-            </p>
-
-            <p>
-                مهتم بالتقنية والتعليم وبناء المنتجات الرقمية 🚀
-            </p>
-
-            <div class="profile-tabs">
-
-                <button class="active">
-                    المنشورات
+<!-- REELS -->
+<main class="reels-page">
+
+    <div class="reels-container" id="reelsContainer">
+
+        <!-- REEL 1 -->
+        <article class="reel">
+
+            <video
+                autoplay
+                muted
+                loop
+                playsinline
+                preload="metadata"
+                src="https://archive.org/download/BigBuckBunny_124/Content/big_buck_bunny_720p_surround.mp4">
+            </video>
+
+            <div class="reel-top">
+                <span class="reels-title">Reels</span>
+
+                <button class="sound-btn" onclick="toggleSound(this)">
+                    🔇
                 </button>
+            </div>
 
-                <button>
-                    الصور
+            <div class="reel-info">
+
+                <div class="user">
+                    <img src="https://i.pravatar.cc/100?img=11">
+
+                    <span class="username">Ahmed Mohamed</span>
+
+                    <button class="follow" onclick="followUser(this)">
+                        متابعة
+                    </button>
+                </div>
+
+                <p class="caption">
+                    لحظة جميلة تستحق المشاركة ✨
+                    <br>
+                    #EN #Reels #Moments
+                </p>
+
+                <div class="music">
+                    ♫ Original audio · Ahmed
+                </div>
+
+            </div>
+
+            <div class="actions">
+
+                <div class="action like-action" onclick="like(this)">
+                    <div class="action-icon">♡</div>
+                    <span class="action-count">2.4K</span>
+                </div>
+
+                <div class="action" onclick="openComments()">
+                    <div class="action-icon">▱</div>
+                    <span class="action-count">184</span>
+                </div>
+
+                <div class="action" onclick="openShare()">
+                    <div class="action-icon">↗</div>
+                    <span class="action-count">Share</span>
+                </div>
+
+                <div class="action">
+                    <div class="action-icon">•••</div>
+                </div>
+
+            </div>
+
+            <div class="progress">
+                <div class="progress-bar"></div>
+            </div>
+
+        </article>
+
+
+        <!-- REEL 2 -->
+        <article class="reel">
+
+            <video
+                muted
+                loop
+                playsinline
+                preload="metadata"
+                src="https://storage.googleapis.com/coverr-main/mp4/Mt_Baker.mp4">
+            </video>
+
+            <div class="reel-top">
+                <span class="reels-title">Reels</span>
+
+                <button class="sound-btn" onclick="toggleSound(this)">
+                    🔇
                 </button>
+            </div>
 
-                <button>
-                    الأصدقاء
+            <div class="reel-info">
+
+                <div class="user">
+                    <img src="https://i.pravatar.cc/100?img=32">
+
+                    <span class="username">Omar Hassan</span>
+
+                    <button class="follow" onclick="followUser(this)">
+                        متابعة
+                    </button>
+                </div>
+
+                <p class="caption">
+                    أحيانًا أفضل اللحظات هي أبسطها.
+                    🌄
+                </p>
+
+                <div class="music">
+                    ♫ Original audio · Omar
+                </div>
+
+            </div>
+
+            <div class="actions">
+
+                <div class="action like-action" onclick="like(this)">
+                    <div class="action-icon">♡</div>
+                    <span class="action-count">8.7K</span>
+                </div>
+
+                <div class="action" onclick="openComments()">
+                    <div class="action-icon">▱</div>
+                    <span class="action-count">392</span>
+                </div>
+
+                <div class="action" onclick="openShare()">
+                    <div class="action-icon">↗</div>
+                    <span class="action-count">Share</span>
+                </div>
+
+                <div class="action">
+                    <div class="action-icon">•••</div>
+                </div>
+
+            </div>
+
+            <div class="progress">
+                <div class="progress-bar"></div>
+            </div>
+
+        </article>
+
+
+        <!-- REEL 3 -->
+        <article class="reel">
+
+            <video
+                muted
+                loop
+                playsinline
+                preload="metadata"
+                src="https://archive.org/download/ElephantsDream/ed_1024_512kb.mp4">
+            </video>
+
+            <div class="reel-top">
+                <span class="reels-title">Reels</span>
+
+                <button class="sound-btn" onclick="toggleSound(this)">
+                    🔇
                 </button>
-
             </div>
 
-        </div>
+            <div class="reel-info">
 
-    </div>
+                <div class="user">
+                    <img src="https://i.pravatar.cc/100?img=47">
 
-    <div style="height:15px"></div>
+                    <span class="username">EN Community</span>
 
-    <div id="profilePosts"></div>
-
-</section>
-
-
-<!-- NOTIFICATIONS -->
-
-<section
-    id="notifications"
-    class="page">
-
-    <div class="card" style="padding:18px">
-
-        <h2>الإشعارات</h2>
-
-        <span class="muted">
-            آخر التفاعلات على حسابك
-        </span>
-
-    </div>
-
-    <div style="height:14px"></div>
-
-    <div class="card">
-
-        <div class="notification">
-
-            <div class="notification-icon">
-                ❤️
-            </div>
-
-            <div>
-                <b>أحمد محمد</b>
-                أعجب بمنشورك
-                <div class="muted">
-                    منذ 4 دقائق
+                    <button class="follow" onclick="followUser(this)">
+                        متابعة
+                    </button>
                 </div>
-            </div>
 
-        </div>
+                <p class="caption">
+                    Welcome to EN.
+                    مساحة جديدة للمشاركة والتواصل.
+                </p>
 
-
-        <div class="notification">
-
-            <div class="notification-icon">
-                👤
-            </div>
-
-            <div>
-                <b>سارة علي</b>
-                بدأت بمتابعتك
-                <div class="muted">
-                    منذ 20 دقيقة
+                <div class="music">
+                    ♫ Original audio · EN
                 </div>
+
             </div>
 
-        </div>
+            <div class="actions">
 
-
-        <div class="notification">
-
-            <div class="notification-icon">
-                💬
-            </div>
-
-            <div>
-                <b>نور</b>
-                علقت على منشورك
-                <div class="muted">
-                    منذ ساعة
+                <div class="action like-action" onclick="like(this)">
+                    <div class="action-icon">♡</div>
+                    <span class="action-count">15K</span>
                 </div>
-            </div>
 
-        </div>
+                <div class="action" onclick="openComments()">
+                    <div class="action-icon">▱</div>
+                    <span class="action-count">720</span>
+                </div>
 
-    </div>
+                <div class="action" onclick="openShare()">
+                    <div class="action-icon">↗</div>
+                    <span class="action-count">Share</span>
+                </div>
 
-</section>
-
-
-<!-- MESSAGES -->
-
-<section
-    id="messages"
-    class="page">
-
-    <div class="card" style="padding:18px">
-
-        <h2>الرسائل</h2>
-
-        <span class="muted">
-            محادثاتك الأخيرة
-        </span>
-
-    </div>
-
-    <div style="height:14px"></div>
-
-    <div class="card" style="padding:8px">
-
-        <div
-            class="person"
-            onclick="openChat('أحمد محمد')">
-
-            <img
-                class="avatar"
-                src="https://i.pravatar.cc/70?img=11">
-
-            <div class="person-info">
-
-                <b>أحمد محمد</b>
-
-                <span>
-                    نشوفك بكرة إن شاء الله
-                </span>
+                <div class="action">
+                    <div class="action-icon">•••</div>
+                </div>
 
             </div>
 
-            🟢
-
-        </div>
-
-
-        <div
-            class="person"
-            onclick="openChat('سارة علي')">
-
-            <img
-                class="avatar"
-                src="https://i.pravatar.cc/70?img=47">
-
-            <div class="person-info">
-
-                <b>سارة علي</b>
-
-                <span>
-                    شفت المنشور الجديد؟
-                </span>
-
+            <div class="progress">
+                <div class="progress-bar"></div>
             </div>
 
-            🟢
-
-        </div>
-
-
-        <div
-            class="person"
-            onclick="openChat('نور')">
-
-            <img
-                class="avatar"
-                src="https://i.pravatar.cc/70?img=32">
-
-            <div class="person-info">
-
-                <b>نور</b>
-
-                <span>
-                    تمام، شكرًا!
-                </span>
-
-            </div>
-
-            🟢
-
-        </div>
+        </article>
 
     </div>
 
-</section>
 
+    <!-- DESKTOP NAV -->
+    <div class="reel-nav">
 
-<!-- FRIENDS -->
+        <button class="nav-arrow" onclick="nextReel()">
+            ↓
+        </button>
 
-<section
-    id="friends"
-    class="page">
-
-    <div class="card" style="padding:18px">
-
-        <h2>الأصدقاء</h2>
-
-        <span class="muted">
-            أشخاص قد تعرفهم
-        </span>
+        <button class="nav-arrow" onclick="previousReel()">
+            ↑
+        </button>
 
     </div>
-
-    <div style="height:14px"></div>
-
-    <div
-        id="friendsList"
-        class="friends-list">
-
-    </div>
-
-</section>
-
-
-<!-- SAVED -->
-
-<section
-    id="saved"
-    class="page">
-
-    <div class="card" style="padding:18px">
-
-        <h2>المحفوظات</h2>
-
-        <span class="muted">
-            المنشورات التي حفظتها
-        </span>
-
-    </div>
-
-    <div style="height:14px"></div>
-
-    <div id="savedFeed"></div>
-
-</section>
-
-
-<!-- SETTINGS -->
-
-<section
-    id="settings"
-    class="page">
-
-    <div class="card" style="padding:18px">
-
-        <h2>الإعدادات</h2>
-
-        <span class="muted">
-            تخصيص تجربة EN
-        </span>
-
-
-        <div class="setting">
-
-            <div>
-
-                <b>
-                    الوضع الداكن
-                </b>
-
-                <small>
-                    تغيير مظهر المنصة
-                </small>
-
-            </div>
-
-            <button
-                class="switch"
-                id="themeSwitch"
-                onclick="toggleDark()">
-
-                <span></span>
-
-            </button>
-
-        </div>
-
-
-        <div class="setting">
-
-            <div>
-
-                <b>
-                    إشعارات التفاعل
-                </b>
-
-                <small>
-                    إعجابات وتعليقات ومتابعات
-                </small>
-
-            </div>
-
-            <button
-                class="switch on">
-
-                <span></span>
-
-            </button>
-
-        </div>
-
-
-        <div class="setting">
-
-            <div>
-
-                <b>
-                    حالة الظهور
-                </b>
-
-                <small>
-                    السماح للأصدقاء بمعرفة أنك متصل
-                </small>
-
-            </div>
-
-            <button
-                class="switch on">
-
-                <span></span>
-
-            </button>
-
-        </div>
-
-
-        <div class="setting">
-
-            <div>
-
-                <b>
-                    الخصوصية والأمان
-                </b>
-
-                <small>
-                    إدارة بيانات حسابك
-                </small>
-
-            </div>
-
-            ➜
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- SEARCH -->
-
-<section
-    id="searchPage"
-    class="page">
-
-    <div class="card" style="padding:18px">
-
-        <h2>
-            نتائج البحث
-        </h2>
-
-        <div
-            id="searchResults"
-            style="margin-top:15px">
-
-        </div>
-
-    </div>
-
-</section>
-
 
 </main>
 
 
-<!-- ================= RIGHT ================= -->
+<!-- COMMENTS MODAL -->
 
-<aside class="sidebar right-sidebar">
+<div class="modal" id="commentsModal">
 
-    <div class="card right-card">
+    <div class="comments-box">
 
-        <h3 class="right-title">
-            🔥 الأكثر تداولًا
-        </h3>
+        <div class="comments-header">
 
-        <div class="trend">
-            <b>#EN</b>
-            <span>
-                12.4K منشور
-            </span>
-        </div>
-
-        <div class="trend">
-            <b>#تعليم</b>
-            <span>
-                8.7K منشور
-            </span>
-        </div>
-
-        <div class="trend">
-            <b>#تكنولوجيا</b>
-            <span>
-                6.2K منشور
-            </span>
-        </div>
-
-        <div class="trend">
-            <b>#مصر</b>
-            <span>
-                5.9K منشور
-            </span>
-        </div>
-
-    </div>
-
-
-    <div class="card right-card">
-
-        <h3 class="right-title">
-            👥 أشخاص قد تعرفهم
-        </h3>
-
-        <div id="miniFriends"></div>
-
-    </div>
-
-</aside>
-
-</div>
-
-
-<!-- MOBILE -->
-
-<nav class="mobile-nav">
-
-    <button
-        class="active"
-        onclick="showPage('home')">
-
-        🏠
-
-    </button>
-
-    <button
-        onclick="showPage('searchPage')">
-
-        🔎
-
-    </button>
-
-    <button
-        onclick="openComposer()">
-
-        ➕
-
-    </button>
-
-    <button
-        onclick="showPage('messages')">
-
-        💬
-
-    </button>
-
-    <button
-        onclick="showPage('profile')">
-
-        👤
-
-    </button>
-
-</nav>
-
-
-<!-- ================= COMPOSER MODAL ================= -->
-
-<div
-    class="modal"
-    id="composerModal">
-
-    <div class="modal-box">
-
-        <div class="modal-header">
-
-            <h3>
-                إنشاء منشور
-            </h3>
+            <span>التعليقات</span>
 
             <button
                 class="close"
-                onclick="closeModal('composerModal')">
-
+                onclick="closeModal('commentsModal')">
                 ×
-
             </button>
 
         </div>
 
+        <div class="comments-list" id="commentsList">
 
-        <textarea
-            id="postText"
-            placeholder="ماذا تريد أن تشارك مع مجتمع EN؟">
+            <div class="comment">
 
-        </textarea>
+                <img src="https://i.pravatar.cc/100?img=5">
 
+                <div class="comment-body">
+                    <div class="comment-name">
+                        محمد
+                    </div>
+
+                    <div class="comment-text">
+                        فيديو جميل جدًا 👏
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="comment">
+
+                <img src="https://i.pravatar.cc/100?img=8">
+
+                <div class="comment-body">
+                    <div class="comment-name">
+                        سارة
+                    </div>
+
+                    <div class="comment-text">
+                        🔥🔥
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <form
+            class="comment-form"
+            onsubmit="addComment(event)">
+
+            <input
+                id="commentInput"
+                placeholder="اكتب تعليقًا..."
+                autocomplete="off">
+
+            <button>
+                نشر
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- SHARE MODAL -->
+
+<div class="modal" id="shareModal">
+
+    <div class="share-box">
+
+        <h3>مشاركة الـ Reel</h3>
 
         <button
-            class="primary-btn"
-            onclick="publishPost()">
+            class="share-option"
+            onclick="copyLink()">
+            🔗 نسخ الرابط
+        </button>
 
-            نشر المنشور
+        <button
+            class="share-option"
+            onclick="alert('تم فتح المشاركة')">
+            ↗ مشاركة مع الأصدقاء
+        </button>
 
+        <button
+            class="share-option"
+            onclick="closeModal('shareModal')">
+            إلغاء
         </button>
 
     </div>
-
-</div>
-
-
-<!-- STORY -->
-
-<div
-    class="modal"
-    id="storyModal">
-
-    <div
-        class="modal-box"
-        style="text-align:center">
-
-        <div class="modal-header">
-
-            <h3 id="storyTitle">
-                Story
-            </h3>
-
-            <button
-                class="close"
-                onclick="closeModal('storyModal')">
-
-                ×
-
-            </button>
-
-        </div>
-
-        <img
-            id="storyImage"
-            style="
-                width:100%;
-                max-height:520px;
-                object-fit:cover;
-                border-radius:13px;
-            ">
-
-    </div>
-
-</div>
-
-
-<!-- CHAT -->
-
-<div
-    class="modal"
-    id="chatModal">
-
-    <div class="modal-box">
-
-        <div class="modal-header">
-
-            <h3 id="chatTitle">
-                المحادثة
-            </h3>
-
-            <button
-                class="close"
-                onclick="closeModal('chatModal')">
-
-                ×
-
-            </button>
-
-        </div>
-
-        <div
-            class="card"
-            style="
-                padding:14px;
-                background:var(--soft);
-                margin-bottom:12px;
-            ">
-
-            مرحبًا 👋  
-            هذه محادثة تجريبية داخل EN.
-
-        </div>
-
-        <div class="comment-box">
-
-            <input
-                id="chatInput"
-                placeholder="اكتب رسالة...">
-
-            <button
-                onclick="sendMessage()">
-
-                إرسال
-
-            </button>
-
-        </div>
-
-    </div>
-
-</div>
-
-
-<div
-    class="toast"
-    id="toast">
 
 </div>
 
 
 <script>
 
-/* ================= DATA ================= */
+/* ================= VIDEO OBSERVER ================= */
 
-let posts = [
+const reels = document.querySelectorAll(".reel");
+const videos = document.querySelectorAll(".reel video");
 
-    {
-        id:1,
-        user:"أحمد محمد",
-        avatar:"https://i.pravatar.cc/100?img=11",
-        text:"التطور الحقيقي يبدأ بخطوة صغيرة كل يوم. المهم إنك تفضل مستمر. 🚀",
-        image:"https://images.unsplash.com/photo-1497366754035-f200968a6e72",
-        likes:1240,
-        comments:87,
-        saved:false
-    },
+const observer = new IntersectionObserver(
+    entries => {
 
-    {
-        id:2,
-        user:"نور علي",
-        avatar:"https://i.pravatar.cc/100?img=32",
-        text:"أحيانًا أفضل قرار هو إنك تدي نفسك وقت تفكر بهدوء قبل أي خطوة.",
-        image:"https://images.unsplash.com/photo-1499209974431-9dddcece7f88",
-        likes:438,
-        comments:29,
-        saved:false
-    },
+        entries.forEach(entry => {
 
-    {
-        id:3,
-        user:"محمد خالد",
-        avatar:"https://i.pravatar.cc/100?img=13",
-        text:"النجاح مش لحظة واحدة، هو مجموعة محاولات صغيرة بتتراكم مع الوقت. 💙",
-        image:"https://images.unsplash.com/photo-1521737604893-d14cc237f11d",
-        likes:763,
-        comments:41,
-        saved:false
-    }
+            const video = entry.target.querySelector("video");
 
-];
+            if(entry.isIntersecting){
 
+                videos.forEach(v => {
 
-const people = [
+                    if(v !== video){
+                        v.pause();
+                    }
 
-    ["سارة علي",47],
-    ["يوسف خالد",14],
-    ["مريم أحمد",44],
-    ["نور",32],
-    ["محمد",13]
+                });
 
-];
+                video.play().catch(() => {});
 
-
-/* ================= RENDER POSTS ================= */
-
-function renderPosts(target="feed", list=posts){
-
-    const container =
-        document.getElementById(target);
-
-    if(!container) return;
-
-    if(list.length === 0){
-
-        container.innerHTML = `
-            <div class="card"
-                 style="padding:30px;text-align:center">
-                <h3>لا توجد منشورات</h3>
-                <div class="muted">
-                    ستظهر منشوراتك المحفوظة هنا.
-                </div>
-            </div>
-        `;
-
-        return;
-    }
-
-
-    container.innerHTML = list.map(post => `
-
-        <article
-            class="card post"
-            id="post-${post.id}">
-
-            <div class="post-header">
-
-                <img
-                    class="avatar"
-                    src="${post.avatar}">
-
-                <div class="info">
-
-                    <b>
-                        ${post.user}
-                    </b>
-
-                    <small>
-                        منذ ساعتين · 🌎
-                    </small>
-
-                </div>
-
-                <button class="more">
-                    •••
-                </button>
-
-            </div>
-
-
-            <div class="post-text">
-
-                ${escapeHTML(post.text)}
-
-            </div>
-
-
-            ${
-                post.image
-                ?
-                `<img
-                    class="post-image"
-                    src="${post.image}">`
-                :
-                ""
+            }else{
+                video.pause();
             }
 
-
-            <div class="post-stats">
-
-                <span>
-                    ❤️ ${post.likes.toLocaleString()}
-                </span>
-
-                <span>
-                    ${post.comments} تعليق · 32 مشاركة
-                </span>
-
-            </div>
-
-
-            <div class="post-actions">
-
-                <button
-                    onclick="likePost(${post.id},this)">
-
-                    ❤️ إعجاب
-
-                </button>
-
-
-                <button
-                    onclick="toggleComments(${post.id})">
-
-                    💬 تعليق
-
-                </button>
-
-
-                <button
-                    onclick="sharePost()">
-
-                    ↗ مشاركة
-
-                </button>
-
-
-                <button
-                    onclick="savePost(${post.id},this)">
-
-                    🔖
-                    ${post.saved ? "محفوظ" : "حفظ"}
-
-                </button>
-
-            </div>
-
-
-            <div
-                class="comments"
-                id="comments-${post.id}">
-
-                <div
-                    id="comments-list-${post.id}">
-
-                </div>
-
-                <div class="comment-box">
-
-                    <input
-                        id="comment-input-${post.id}"
-                        placeholder="اكتب تعليقًا...">
-
-                    <button
-                        onclick="addComment(${post.id})">
-
-                        نشر
-
-                    </button>
-
-                </div>
-
-            </div>
-
-        </article>
-
-    `).join("");
-
-}
-
-
-/* ================= NAVIGATION ================= */
-
-function showPage(page){
-
-    document
-        .querySelectorAll(".page")
-        .forEach(section => {
-
-            section.classList.remove("active");
-
         });
 
-
-    const target =
-        document.getElementById(page);
-
-    if(target){
-
-        target.classList.add("active");
-
+    },
+    {
+        threshold:.7
     }
+);
 
-
-    document
-        .querySelectorAll(".nav-item")
-        .forEach(button => {
-
-            button.classList.toggle(
-                "active",
-                button.dataset.page === page
-            );
-
-        });
-
-
-    if(page === "profile"){
-
-        renderPosts(
-            "profilePosts",
-            posts.slice(0,2)
-        );
-
-    }
-
-
-    if(page === "saved"){
-
-        renderPosts(
-            "savedFeed",
-            posts.filter(p => p.saved)
-        );
-
-    }
-
-
-    if(page === "friends"){
-
-        renderFriends();
-
-    }
-
-
-    if(page === "notifications"){
-
-        document
-            .getElementById("notificationBadge")
-            .style.display = "none";
-
-    }
-
-}
+reels.forEach(reel => observer.observe(reel));
 
 
 /* ================= LIKE ================= */
 
-function likePost(id,button){
+function like(element){
 
-    const post =
-        posts.find(p => p.id === id);
+    element.classList.toggle("liked");
 
-    if(!post) return;
+    const icon = element.querySelector(".action-icon");
+    const count = element.querySelector(".action-count");
+
+    if(element.classList.contains("liked")){
+
+        icon.textContent = "♥";
+
+        if(!count.dataset.original){
+            count.dataset.original = count.textContent;
+        }
+
+        count.textContent = "Liked";
+
+    }else{
+
+        icon.textContent = "♡";
+
+        count.textContent =
+            count.dataset.original || "0";
+    }
+}
 
 
-    if(!button.classList.contains("liked")){
+/* ================= SOUND ================= */
 
-        post.likes++;
+function toggleSound(button){
 
-        button.classList.add("liked");
+    const reel = button.closest(".reel");
+    const video = reel.querySelector("video");
 
-        button.innerHTML =
-            "❤️ أعجبتني";
+    video.muted = !video.muted;
+
+    button.textContent =
+        video.muted ? "🔇" : "🔊";
+}
+
+
+/* ================= FOLLOW ================= */
+
+function followUser(button){
+
+    if(button.textContent.trim() === "متابعة"){
+
+        button.textContent = "تمت المتابعة";
+        button.style.background = "#fff";
+        button.style.color = "#000";
+
+    }else{
+
+        button.textContent = "متابعة";
+        button.style.background = "transparent";
+        button.style.color = "#fff";
 
     }
-
-    else{
-
-        post.likes--;
-
-        button.classList.remove("liked");
-
-        button.innerHTML =
-            "❤️ إعجاب";
-
-    }
-
-
-    renderPosts();
-
-    showToast("تم تحديث الإعجاب ❤️");
-
 }
 
 
 /* ================= COMMENTS ================= */
 
-function toggleComments(id){
+function openComments(){
 
-    const comments =
-        document.getElementById(
-            "comments-"+id
-        );
-
-    comments.classList.toggle("open");
-
+    document
+        .getElementById("commentsModal")
+        .classList.add("active");
 }
 
 
-function addComment(id){
+function addComment(event){
+
+    event.preventDefault();
 
     const input =
-        document.getElementById(
-            "comment-input-"+id
-        );
+        document.getElementById("commentInput");
 
-    const value =
-        input.value.trim();
+    const text = input.value.trim();
 
-    if(!value){
+    if(!text) return;
 
-        showToast("اكتب تعليقًا أولًا");
+    const comment =
+        document.createElement("div");
 
-        return;
+    comment.className = "comment";
 
-    }
+    comment.innerHTML = `
+        <img src="https://i.pravatar.cc/100?img=12">
 
+        <div class="comment-body">
 
-    const list =
-        document.getElementById(
-            "comments-list-"+id
-        );
+            <div class="comment-name">
+                أنت
+            </div>
 
-
-    list.insertAdjacentHTML(
-        "beforeend",
-        `
-        <div class="comment">
-
-            <img
-                class="avatar"
-                src="https://i.pravatar.cc/50?img=12">
-
-            <div class="comment-content">
-
-                <b>أنت</b>
-
-                <br>
-
-                ${escapeHTML(value)}
-
+            <div class="comment-text">
+                ${escapeHTML(text)}
             </div>
 
         </div>
-        `
-    );
+    `;
 
+    document
+        .getElementById("commentsList")
+        .appendChild(comment);
 
     input.value = "";
-
-    showToast("تم نشر التعليق 💬");
-
-}
-
-
-/* ================= SAVE ================= */
-
-function savePost(id,button){
-
-    const post =
-        posts.find(p => p.id === id);
-
-    if(!post) return;
-
-
-    post.saved = !post.saved;
-
-
-    button.innerHTML =
-        post.saved
-        ? "🔖 محفوظ"
-        : "🔖 حفظ";
-
-
-    showToast(
-        post.saved
-        ? "تم حفظ المنشور 🔖"
-        : "تمت إزالة المنشور"
-    );
-
 }
 
 
 /* ================= SHARE ================= */
 
-function sharePost(){
-
-    if(navigator.clipboard){
-
-        navigator.clipboard.writeText(
-            window.location.href
-        );
-
-    }
-
-    showToast(
-        "تم نسخ رابط المنشور ↗"
-    );
-
-}
-
-
-/* ================= COMPOSER ================= */
-
-function openComposer(){
+function openShare(){
 
     document
-        .getElementById("composerModal")
-        .classList.add("show");
-
-    setTimeout(() => {
-
-        document
-            .getElementById("postText")
-            .focus();
-
-    },100);
-
+        .getElementById("shareModal")
+        .classList.add("active");
 }
 
 
-function publishPost(){
+function copyLink(){
 
-    const textarea =
-        document.getElementById(
-            "postText"
-        );
+    navigator.clipboard
+        .writeText(location.href)
+        .then(() => {
 
-    const text =
-        textarea.value.trim();
+            alert("تم نسخ الرابط");
 
+            closeModal("shareModal");
 
-    if(!text){
+        })
+        .catch(() => {
 
-        showToast(
-            "اكتب محتوى المنشور أولًا"
-        );
+            alert("انسخ الرابط من شريط المتصفح");
 
-        return;
-
-    }
-
-
-    posts.unshift({
-
-        id:Date.now(),
-
-        user:"عبدالرحمن",
-
-        avatar:
-            "https://i.pravatar.cc/100?img=12",
-
-        text:text,
-
-        image:"",
-
-        likes:0,
-
-        comments:0,
-
-        saved:false
-
-    });
-
-
-    textarea.value = "";
-
-    closeModal("composerModal");
-
-    renderPosts();
-
-    showPage("home");
-
-    showToast(
-        "تم نشر منشورك بنجاح ✓"
-    );
-
-}
-
-
-/* ================= STORIES ================= */
-
-function openStory(name){
-
-    document
-        .getElementById("storyTitle")
-        .textContent =
-        name + " — Story";
-
-
-    document
-        .getElementById("storyImage")
-        .src =
-        "https://images.unsplash.com/photo-1497366754035-f200968a6e72";
-
-
-    document
-        .getElementById("storyModal")
-        .classList.add("show");
-
-}
-
-
-/* ================= FRIENDS ================= */
-
-function renderFriends(){
-
-    const container =
-        document.getElementById(
-            "friendsList"
-        );
-
-
-    container.innerHTML =
-        people.map(
-            (person,index) => `
-
-            <div class="card person"
-                 style="padding:13px">
-
-                <img
-                    class="avatar"
-                    src="https://i.pravatar.cc/80?img=${person[1]}">
-
-                <div class="person-info">
-
-                    <b>
-                        ${person[0]}
-                    </b>
-
-                    <span>
-                        ${index+2}
-                        أصدقاء مشتركون
-                    </span>
-
-                </div>
-
-                <button
-                    class="follow"
-                    onclick="
-                        toggleFollow(this)
-                    ">
-
-                    متابعة
-
-                </button>
-
-            </div>
-
-        `
-        ).join("");
-
-}
-
-
-function toggleFollow(button){
-
-    button.textContent =
-        button.textContent === "متابعة"
-        ? "متابَع"
-        : "متابعة";
-
-}
-
-
-/* ================= MINI FRIENDS ================= */
-
-function renderMiniFriends(){
-
-    document
-        .getElementById("miniFriends")
-        .innerHTML =
-        people.slice(0,3).map(
-            person => `
-
-            <div class="person">
-
-                <img
-                    class="avatar"
-                    src="https://i.pravatar.cc/70?img=${person[1]}">
-
-                <div class="person-info">
-
-                    <b>
-                        ${person[0]}
-                    </b>
-
-                </div>
-
-                <button
-                    class="follow"
-                    onclick="
-                        toggleFollow(this)
-                    ">
-
-                    متابعة
-
-                </button>
-
-            </div>
-
-        `
-        ).join("");
-
-}
-
-
-/* ================= CHAT ================= */
-
-function openChat(name){
-
-    document
-        .getElementById("chatTitle")
-        .textContent =
-        "محادثة مع " + name;
-
-
-    document
-        .getElementById("chatModal")
-        .classList.add("show");
-
-}
-
-
-function sendMessage(){
-
-    const input =
-        document.getElementById(
-            "chatInput"
-        );
-
-
-    if(!input.value.trim()){
-
-        return;
-
-    }
-
-
-    input.value = "";
-
-    showToast(
-        "تم إرسال الرسالة ✓"
-    );
-
-}
-
-
-/* ================= SEARCH ================= */
-
-function searchUsers(query){
-
-    query =
-        query.trim().toLowerCase();
-
-
-    if(!query){
-
-        showPage("home");
-
-        return;
-
-    }
-
-
-    showPage("searchPage");
-
-
-    const results = [
-
-        ...people.map(person => ({
-
-            name:person[0],
-
-            image:
-                "https://i.pravatar.cc/70?img="
-                + person[1],
-
-            description:"مستخدم EN"
-
-        })),
-
-        ...posts.map(post => ({
-
-            name:post.user,
-
-            image:post.avatar,
-
-            description:
-                "منشور: "
-                + post.text.substring(0,50)
-
-        }))
-
-    ].filter(item =>
-
-        item.name
-            .toLowerCase()
-            .includes(query)
-
-        ||
-
-        item.description
-            .toLowerCase()
-            .includes(query)
-
-    );
-
-
-    const container =
-        document.getElementById(
-            "searchResults"
-        );
-
-
-    if(!results.length){
-
-        container.innerHTML =
-            `
-            <div class="muted">
-                لا توجد نتائج مطابقة.
-            </div>
-            `;
-
-        return;
-
-    }
-
-
-    container.innerHTML =
-        results.map(item => `
-
-            <div
-                class="person"
-                style="padding:10px">
-
-                <img
-                    class="avatar"
-                    src="${item.image}">
-
-                <div class="person-info">
-
-                    <b>
-                        ${item.name}
-                    </b>
-
-                    <span>
-                        ${item.description}
-                    </span>
-
-                </div>
-
-            </div>
-
-        `).join("");
-
-}
-
-
-/* ================= DARK MODE ================= */
-
-function toggleDark(){
-
-    document
-        .body
-        .classList
-        .toggle("dark");
-
-
-    const dark =
-        document.body.classList.contains(
-            "dark"
-        );
-
-
-    localStorage.setItem(
-        "enTheme",
-        dark ? "dark" : "light"
-    );
-
-
-    const sw =
-        document.getElementById(
-            "themeSwitch"
-        );
-
-
-    if(sw){
-
-        sw.classList.toggle(
-            "on",
-            dark
-        );
-
-    }
-
+        });
 }
 
 
@@ -2666,8 +1088,7 @@ function closeModal(id){
 
     document
         .getElementById(id)
-        .classList.remove("show");
-
+        .classList.remove("active");
 }
 
 
@@ -2675,99 +1096,188 @@ document
     .querySelectorAll(".modal")
     .forEach(modal => {
 
-        modal.addEventListener(
-            "click",
-            function(event){
+        modal.addEventListener("click", event => {
 
-                if(event.target === modal){
+            if(event.target === modal){
 
-                    modal.classList.remove(
-                        "show"
-                    );
-
-                }
+                modal.classList.remove("active");
 
             }
-        );
+
+        });
 
     });
 
 
-/* ================= TOAST ================= */
+/* ================= REEL NAVIGATION ================= */
 
-let toastTimer;
+let currentReel = 0;
 
-function showToast(message){
 
-    const toast =
-        document.getElementById(
-            "toast"
+function nextReel(){
+
+    currentReel =
+        Math.min(
+            currentReel + 1,
+            reels.length - 1
         );
 
-
-    toast.textContent = message;
-
-    toast.classList.add("show");
-
-
-    clearTimeout(toastTimer);
-
-
-    toastTimer =
-        setTimeout(() => {
-
-            toast.classList.remove(
-                "show"
-            );
-
-        },2200);
-
+    reels[currentReel]
+        .scrollIntoView({
+            behavior:"smooth"
+        });
 }
+
+
+function previousReel(){
+
+    currentReel =
+        Math.max(
+            currentReel - 1,
+            0
+        );
+
+    reels[currentReel]
+        .scrollIntoView({
+            behavior:"smooth"
+        });
+}
+
+
+/* ================= UPDATE CURRENT ================= */
+
+const reelObserver =
+    new IntersectionObserver(
+        entries => {
+
+            entries.forEach(entry => {
+
+                if(entry.isIntersecting){
+
+                    currentReel =
+                        [...reels].indexOf(
+                            entry.target
+                        );
+
+                }
+
+            });
+
+        },
+        {
+            threshold:.7
+        }
+    );
+
+reels.forEach(reel =>
+    reelObserver.observe(reel)
+);
+
+
+/* ================= PROGRESS ================= */
+
+videos.forEach(video => {
+
+    video.addEventListener("timeupdate", () => {
+
+        const bar =
+            video
+            .closest(".reel")
+            .querySelector(".progress-bar");
+
+        if(video.duration){
+
+            bar.style.width =
+                (video.currentTime / video.duration * 100)
+                + "%";
+
+        }
+
+    });
+
+});
+
+
+/* ================= CLICK VIDEO ================= */
+
+videos.forEach(video => {
+
+    video.addEventListener("click", () => {
+
+        if(video.paused){
+
+            video.play();
+
+        }else{
+
+            video.pause();
+
+        }
+
+    });
+
+});
+
+
+/* ================= KEYBOARD ================= */
+
+document.addEventListener("keydown", event => {
+
+    if(event.key === "ArrowDown"){
+        nextReel();
+    }
+
+    if(event.key === "ArrowUp"){
+        previousReel();
+    }
+
+});
+
+
+/* ================= TOUCH SWIPE ================= */
+
+let touchStartY = 0;
+
+document.addEventListener("touchstart", event => {
+
+    touchStartY =
+        event.touches[0].clientY;
+
+});
+
+document.addEventListener("touchend", event => {
+
+    const touchEndY =
+        event.changedTouches[0].clientY;
+
+    const difference =
+        touchStartY - touchEndY;
+
+    if(Math.abs(difference) < 60)
+        return;
+
+    if(difference > 0){
+        nextReel();
+    }else{
+        previousReel();
+    }
+
+});
 
 
 /* ================= SECURITY ================= */
 
 function escapeHTML(text){
 
-    return text.replace(
-        /[&<>"']/g,
-        character => ({
+    const div =
+        document.createElement("div");
 
-            "&":"&amp;",
-            "<":"&lt;",
-            ">":"&gt;",
-            '"':"&quot;",
-            "'":"&#039;"
+    div.textContent = text;
 
-        }[character])
-    );
-
+    return div.innerHTML;
 }
-
-
-/* ================= INIT ================= */
-
-if(
-    localStorage.getItem("enTheme")
-    === "dark"
-){
-
-    document.body.classList.add(
-        "dark"
-    );
-
-    document
-        .getElementById("themeSwitch")
-        ?.classList.add("on");
-
-}
-
-
-renderPosts();
-
-renderMiniFriends();
 
 </script>
 
 </body>
-            </html>
+</html>
